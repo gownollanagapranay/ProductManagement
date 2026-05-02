@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Product Management</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <h1>Product Management</h1>
+        <p class="muted">Simple, professional interface for managing products</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="add">Add Product</button>
+        <button class="tab" data-tab="update">Update Product</button>
+        <button class="tab" data-tab="view">View Products</button>
+        <button class="tab" data-tab="delete">Delete Product</button>
+      </nav>
+
+      <section id="add" class="panel active">
+        <h2>Add Product</h2>
+        <form id="add-form" class="form-grid">
+          <label>Id <input id="add-id" type="number" placeholder="Optional - leave blank to auto-generate" /></label>
+          <label>Name <input id="add-name" type="text" required /></label>
+          <label class="full">Description <input id="add-desc" type="text" /></label>
+          <label>Price <input id="add-price" type="number" required min="0" /></label>
+          <div class="full buttons">
+            <button class="primary" type="submit">Add Product</button>
+            <button type="reset" class="muted-btn">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="update" class="panel">
+        <h2>Update Product</h2>
+        <form id="update-form" class="form-grid">
+          <label>Id <input id="upd-id" type="number" required /></label>
+          <div class="full">
+            <button id="load-for-update" type="button" class="muted-btn">Load Product</button>
+          </div>
+          <label>Name <input id="upd-name" type="text" required /></label>
+          <label class="full">Description <input id="upd-desc" type="text" /></label>
+          <label>Price <input id="upd-price" type="number" required min="0" /></label>
+          <div class="full buttons">
+            <button class="primary" type="submit">Save Changes</button>
+            <button type="button" id="upd-clear" class="muted-btn">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="view" class="panel">
+        <h2>View Products</h2>
+        <div class="controls">
+          <input id="search" placeholder="Search name or description" />
+          <button id="refresh" class="muted-btn">Refresh</button>
+        </div>
+        <div id="view-status" class="status"></div>
+        <div class="table-wrap">
+          <table id="products-table">
+            <thead>
+              <tr><th>Id</th><th>Name</th><th>Description</th><th>Price</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="delete" class="panel">
+        <h2>Delete Product</h2>
+        <form id="delete-form" class="form-grid">
+          <label>Id <input id="del-id" type="number" required /></label>
+          <div class="full buttons">
+            <button class="danger" type="submit">Delete</button>
+            <button type="button" id="del-clear" class="muted-btn">Clear</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Modal viewer -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-panel">
+        <header>
+          <h3 id="modal-title">Product</h3>
+          <button id="modal-close" class="icon-btn">✕</button>
+        </header>
+        <div class="modal-body">
+          <p><strong>Id:</strong> <span id="m-id"></span></p>
+          <p><strong>Name:</strong> <span id="m-name"></span></p>
+          <p><strong>Description:</strong> <span id="m-desc"></span></p>
+          <p><strong>Price:</strong> <span id="m-price"></span></p>
+        </div>
+        <footer class="modal-actions">
+          <button id="modal-edit" class="primary">Edit</button>
+          <button id="modal-close-2">Close</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Confirm modal & toast (shared) -->
+    <div id="confirm-modal" class="modal hidden">
+      <div class="modal-panel">
+        <header>
+          <h3>Confirm</h3>
+          <button id="confirm-close" class="icon-btn">✕</button>
+        </header>
+        <div class="modal-body">
+          <p id="confirm-text">Are you sure?</p>
+        </div>
+        <footer class="modal-actions">
+          <button id="confirm-yes" class="danger">Delete</button>
+          <button id="confirm-no">Cancel</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
